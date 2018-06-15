@@ -1,24 +1,29 @@
-var electron = require("electron");
+'use strict';
+
+var electron = require('electron');
 var app = electron.app;
-var BrowserWindow = require("browser-window");
+var BrowserWindow = electron.BrowserWindow;
 
 var mainWindow = null;
 
-app.on("window-all-closed", function() {
-    if (process.platform != "darwin") {
-        app.quit();
-    }
+app.on('window-all-closed', function() {
+  if (process.platform != 'darwin')
+    app.quit();
 });
 
-app.on("ready", function() {
-    mainWindow = new BrowserWindow({
-        // ウィンドウ作成時のオプション
-    });
+app.on('ready', function() {
 
-    // index.html を開く
-    mainWindow.loadUrl("file://" + __dirname + "/index.html");
-
-    mainWindow.on("closed", function() {
-        mainWindow = null;
+  // ブラウザ(Chromium)の起動, 初期画面のロード
+  mainWindow = new BrowserWindow({
+      width: 800,
+      height: 50,
+      transparent: true,
+      frame: false,
+      resizable: false
     });
+  mainWindow.loadURL('file://' + __dirname + '/index.html');
+
+  mainWindow.on('closed', function() {
+    mainWindow = null;
+  });
 });

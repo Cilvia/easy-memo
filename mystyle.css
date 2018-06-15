@@ -1,0 +1,5 @@
+body {
+    background-color: rgba(24, 24, 24, 0.7);
+    color: #fff;
+    -webkit-user-select: none;
+}
