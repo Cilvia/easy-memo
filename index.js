@@ -19,7 +19,7 @@ app.on('ready', function() {
       height: 50,
       transparent: true,
       frame: false,
-      resizable: false
+     // resizable: false
     });
   mainWindow.loadURL('file://' + __dirname + '/index.html');
 
