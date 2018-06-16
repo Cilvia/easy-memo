@@ -5,7 +5,6 @@ const {app,BrowserWindow, Menu, Tray, globalShortcut} = require('electron')
 var win = null;
 var setting_win = null;
 var tray = null;
-var force_quit = false;
 
 function makeSettingWindow() {
   setting_win = new BrowserWindow({
@@ -69,13 +68,8 @@ app.on('ready', function() {
 app.on('will-quit', function () {
   // This is a good place to add tests insuring the app is still
   // responsive and all windows are closed.
-  console.log("will-quit");
   win = null;
   setting_win = null;
   tray = null;
-});
-
-app.on('before_quit',function(){
-  force_quit = true;
 });
 
