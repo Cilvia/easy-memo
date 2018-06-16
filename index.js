@@ -3,6 +3,7 @@
 const {app,BrowserWindow, Menu, Tray} = require('electron')
 
 var win = null;
+var setting_win = null;
 var tray = null;
 
 app.on('window-all-closed', function() {
@@ -21,6 +22,8 @@ app.on('ready', function() {
      // resizable: false,
       skipTaskbar: true
     });
+
+  win.hide();
   win.loadURL('file://' + __dirname + '/index.html');
 
   win.setAlwaysOnTop(true);
@@ -30,7 +33,7 @@ app.on('ready', function() {
     {label: 'Setting', type: 'normal'},
     {label: 'Quit', type: 'normal', role:'quit'}
   ]);
-  tray.setHighlightMode('always');
+  tray.setHighlightMode('never');
   tray.setContextMenu(contextMenu);
 
   tray.on('click', () => {
