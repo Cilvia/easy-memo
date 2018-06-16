@@ -1,10 +1,9 @@
 'use strict';
 
-var electron = require('electron');
-var app = electron.app;
-var BrowserWindow = electron.BrowserWindow;
+const {app,BrowserWindow, Menu, Tray} = require('electron')
 
 var mainWindow = null;
+var tray = null;
 
 app.on('window-all-closed', function() {
   if (process.platform != 'darwin')
@@ -26,4 +25,14 @@ app.on('ready', function() {
   mainWindow.on('closed', function() {
     mainWindow = null;
   });
+
+  tray = new Tray(__dirname + '/img/icon.png')
+  const contextMenu = Menu.buildFromTemplate([
+    {label: 'Item1', type: 'radio'},
+    {label: 'Item2', type: 'radio'},
+    {label: 'Item3', type: 'radio', checked: true},
+    {label: 'Item4', type: 'radio'}
+  ])
+  tray.setToolTip('This is my application.')
+  tray.setContextMenu(contextMenu)
 });
