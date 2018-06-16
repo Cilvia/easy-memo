@@ -65,7 +65,7 @@ app.on('ready', function() {
   })
 
   const ret = globalShortcut.register('CommandOrControl+Shift+Space', function(){
-    win.show();
+    win.isVisible() ? win.hide() : win.show();
   })
   if (!ret) {
     console.log('registration failed')
