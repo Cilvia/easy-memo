@@ -22,9 +22,12 @@ app.on('ready', function() {
     });
   mainWindow.loadURL('file://' + __dirname + '/index.html');
 
-  mainWindow.on('closed', function() {
-    mainWindow = null;
-  });
+  mainWindow.setAlwaysOnTop(true);
+
+  app.on('window-all-closed', function () {
+    if (process.platform !== 'darwin') {
+    }
+  })
 
   tray = new Tray(__dirname + '/img/icon.png')
   const contextMenu = Menu.buildFromTemplate([
