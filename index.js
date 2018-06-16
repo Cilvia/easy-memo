@@ -21,7 +21,8 @@ app.on('ready', function() {
       transparent: true,
       frame: false,
      // resizable: false,
-      skipTaskbar: true
+      skipTaskbar: true,
+      show:false
     });
 
  // win.hide();
@@ -35,20 +36,21 @@ app.on('ready', function() {
   setting_win = new BrowserWindow({
     parent:win,
     width: 600,
-    height: 800
+    height: 800,
+    show:false
   });
   setting_win.loadURL('file://' + __dirname + '/setting.html');
   setting_win.setMenu(null);
-  setting_win.setIcon(__dirname + '/img/icon.png')
+  setting_win.setIcon(__dirname + '/img/icon.png');
   setting_win.on('closed', function () {
-    if(!force_quit)
+    if(!force_quit){
       setting_win.hide();
+    }
   });
-
-  setting_win.hide();
 
   tray = new Tray(__dirname + '/img/icon.png');
   const contextMenu = Menu.buildFromTemplate([
+    {label: 'Write', type: 'normal', click:function(){ win.isVisible() ? win.hide() : win.show()}},
     {label: 'Setting', type: 'normal', click:function(){ setting_win.isVisible() ? setting_win.hide() : setting_win.show()}},
     {label: 'Quit', type: 'normal', role:'quit'}
   ]);
