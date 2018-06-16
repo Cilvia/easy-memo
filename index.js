@@ -25,11 +25,6 @@ app.on('ready', function() {
 
   mainWindow.setAlwaysOnTop(true);
 
-  app.on('window-all-closed', function () {
-    if (process.platform !== 'darwin') {
-    }
-  })
-
   tray = new Tray(__dirname + '/img/icon.png')
   const contextMenu = Menu.buildFromTemplate([
     {label: 'Item1', type: 'radio'},
@@ -40,3 +35,8 @@ app.on('ready', function() {
   tray.setToolTip('This is my application.')
   tray.setContextMenu(contextMenu)
 });
+
+app.on('window-all-closed', function () {
+  if (process.platform !== 'darwin') {
+  }
+})
