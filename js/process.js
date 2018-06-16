@@ -1,4 +1,7 @@
-"use strict";
+var remote = require('remote');
+var app = remote.require('app');
+var Tray = remote.require('tray');
+var Menu = remote.require('menu')
 
 function submit(){
     if(window.event.keyCode==13){
