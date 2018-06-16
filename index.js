@@ -63,6 +63,13 @@ app.on('ready', function() {
   win.on('hide', () => {
     tray.setHighlightMode('never');
   })
+
+  const ret = globalShortcut.register('CommandOrControl+Shift+Space', function(){
+    win.show();
+  })
+  if (!ret) {
+    console.log('registration failed')
+  }
 });
 
 app.on('will-quit', function () {
@@ -71,5 +78,11 @@ app.on('will-quit', function () {
   win = null;
   setting_win = null;
   tray = null;
+
+    // Unregister a shortcut.
+    globalShortcut.unregister('CommandOrControl+Shift+Space');
+  
+    // Unregister all shortcuts.
+    globalShortcut.unregisterAll();
 });
 
