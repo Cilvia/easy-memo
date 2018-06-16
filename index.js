@@ -5,6 +5,7 @@ const {app,BrowserWindow, Menu, Tray} = require('electron')
 var win = null;
 var setting_win = null;
 var tray = null;
+var force_quit = false;
 
 app.on('window-all-closed', function() {
   if (process.platform != 'darwin')
@@ -25,12 +26,24 @@ app.on('ready', function() {
 
   win.hide();
   win.loadURL('file://' + __dirname + '/index.html');
-
   win.setAlwaysOnTop(true);
+
+  setting_win = new BrowserWindow({
+    width: 600,
+    height: 800
+  });
+
+  setting_win.hide();
+  setting_win.loadURL('file://' + __dirname + '/setting.html');
+
+  setting_win.on('closed', function () {
+    if(!force_quit)
+      setting_win.hide();
+  });
 
   tray = new Tray(__dirname + '/img/icon.png');
   const contextMenu = Menu.buildFromTemplate([
-    {label: 'Setting', type: 'normal'},
+    {label: 'Setting', type: 'normal', click:function(){ setting_win.isVisible() ? setting_win.hide() : setting_win.show()}},
     {label: 'Quit', type: 'normal', role:'quit'}
   ]);
   tray.setHighlightMode('never');
@@ -47,7 +60,15 @@ app.on('ready', function() {
   })
 });
 
-app.on('window-all-closed', function () {
-  if (process.platform !== 'darwin') {
-  }
-})
+app.on('will-quit', function () {
+  // This is a good place to add tests insuring the app is still
+  // responsive and all windows are closed.
+  console.log("will-quit");
+  win = null;
+  setting_win = null;
+  tray = null;
+});
+
+app.on('before_quit',function(){
+  force_quit = true;
+});
