@@ -1,6 +1,6 @@
 'use strict';
 
-const {app,BrowserWindow, Menu, Tray} = require('electron')
+const {app,BrowserWindow, Menu, Tray, globalShortcut} = require('electron')
 
 var win = null;
 var setting_win = null;
