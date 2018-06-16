@@ -24,22 +24,28 @@ app.on('ready', function() {
       skipTaskbar: true
     });
 
-  win.hide();
+ // win.hide();
   win.loadURL('file://' + __dirname + '/index.html');
   win.setAlwaysOnTop(true);
 
+  win.on('closed', function () {
+    win = null;
+  });
+
   setting_win = new BrowserWindow({
+    parent:win,
     width: 600,
     height: 800
   });
-
-  setting_win.hide();
   setting_win.loadURL('file://' + __dirname + '/setting.html');
-
+  setting_win.setMenu(null);
+  setting_win.setIcon(__dirname + '/img/icon.png')
   setting_win.on('closed', function () {
     if(!force_quit)
       setting_win.hide();
   });
+
+  setting_win.hide();
 
   tray = new Tray(__dirname + '/img/icon.png');
   const contextMenu = Menu.buildFromTemplate([
