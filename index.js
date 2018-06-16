@@ -7,6 +7,19 @@ var setting_win = null;
 var tray = null;
 var force_quit = false;
 
+function makeSettingWindow() {
+  setting_win = new BrowserWindow({
+    width: 600,
+    height: 800
+  });
+  setting_win.loadURL('file://' + __dirname + '/setting.html');
+  setting_win.setMenu(null);
+  setting_win.setIcon(__dirname + '/img/icon.png');
+  setting_win.on('closed', function () {
+    setting_win = null
+  });
+}
+
 app.on('window-all-closed', function() {
   if (process.platform != 'darwin')
     app.quit();
@@ -33,25 +46,10 @@ app.on('ready', function() {
     win = null;
   });
 
-  setting_win = new BrowserWindow({
-    parent:win,
-    width: 600,
-    height: 800,
-    show:false
-  });
-  setting_win.loadURL('file://' + __dirname + '/setting.html');
-  setting_win.setMenu(null);
-  setting_win.setIcon(__dirname + '/img/icon.png');
-  setting_win.on('closed', function () {
-    if(!force_quit){
-      setting_win.hide();
-    }
-  });
-
   tray = new Tray(__dirname + '/img/icon.png');
   const contextMenu = Menu.buildFromTemplate([
     {label: 'Write', type: 'normal', click:function(){ win.isVisible() ? win.hide() : win.show()}},
-    {label: 'Setting', type: 'normal', click:function(){ setting_win.isVisible() ? setting_win.hide() : setting_win.show()}},
+    {label: 'Setting', type: 'normal', click:function(){ (setting_win!=null) ? setting_win.close() : makeSettingWindow()}},
     {label: 'Quit', type: 'normal', role:'quit'}
   ]);
   tray.setHighlightMode('never');
@@ -80,3 +78,4 @@ app.on('will-quit', function () {
 app.on('before_quit',function(){
   force_quit = true;
 });
+
