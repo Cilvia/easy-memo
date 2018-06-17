@@ -29,7 +29,7 @@ function addCommand(){
 }
 
 function loadCmdFile(){
-    WordCommand = 
+    //WordCommand = 
 }
 
 function updateCmdFile(){
