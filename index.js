@@ -32,7 +32,7 @@ app.on('ready', function() {
       height: 50,
       transparent: true,
       frame: false,
-     // resizable: false,
+      resizable: false,
       skipTaskbar: true,
       show:false
     });
