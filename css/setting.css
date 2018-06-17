@@ -2,3 +2,9 @@ body{
     background-color: rgba(24, 24, 24, 0);
     color: #fff;
 }
+
+textarea{
+    resize: none;
+    overflow: auto;
+    height:100px;
+}
