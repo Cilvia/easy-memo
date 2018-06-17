@@ -6,7 +6,7 @@ function makeTask(function_word){
     return new Function("text",function_word)
 }
 
-const WordCommand = {"#dodo":"console.log(text)"}
+var WordCommand = {"#dodo":"console.log(text)"}
 
 function submit(){
     if(window.event.keyCode==13){
@@ -21,4 +21,17 @@ function submit(){
         });
         document.getElementById("memo").value = null;
     }
+}
+
+function addCommand(){
+    WordCommand[document.addCommandForm.word.value] = document.addCommandForm.js_code.value;
+    updateCmdFile();
+}
+
+function loadCmdFile(){
+    WordCommand = 
+}
+
+function updateCmdFile(){
+    var json = JsonStringify(WordCommand);
 }
