@@ -2,11 +2,11 @@ require('electron').remote.getCurrentWindow().on('hide',function(){
     document.getElementById("memo").value = null;
 });
 
-function dodo(text){
-    console.log(text)
+function makeTask(function_word){
+    return new Function("text",function_word)
 }
 
-const WordCommand = {"#dodo":dodo}
+const WordCommand = {"#dodo":"console.log(text)"}
 
 function submit(){
     if(window.event.keyCode==13){
@@ -14,8 +14,11 @@ function submit(){
         var words = memo.split(' ')
         words.forEach(word => {
             if(WordCommand[word] != null){
-                WordCommand[word](memo.replace(word,''));
+                makeTask(WordCommand[word])(memo.replace(word,''));
+                document.getElementById("memo").value = null;
+                return;
             }
         });
+        document.getElementById("memo").value = null;
     }
 }
