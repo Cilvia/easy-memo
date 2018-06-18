@@ -37,7 +37,7 @@ function addCommandTable(key){
 function deleteCommandTable(obj){
     // 削除ボタンを押下された行を取得
     tr = obj.parentNode.parentNode;
-    delete WordCommand[tr.cells[1]];
+    delete WordCommand[tr.cells[1].innerHTML];
     console.log(WordCommand);
     updateCmdFile();
     // trのインデックスを取得して行を削除する
