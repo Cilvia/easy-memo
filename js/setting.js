@@ -4,17 +4,11 @@ var WordCommand;
 
 window.onload= function(){
     loadCmdFile();
-    console.log(WordCommand);
     makeCommandTable();
-}
-
-function makeTask(function_word) {
-  return new Function("text", function_word);
 }
 
 function addCommand() {
     WordCommand[document.getElementById("word").value] = document.getElementById("js_code").value;
-    console.log("hogehoge");
     updateCmdFile();
     addCommandTable(document.getElementById("word").value);
     document.getElementById("word").value = null;
@@ -29,7 +23,6 @@ function makeCommandTable(){
 
 function addCommandTable(key){
     var table = document.getElementById("table");
-    console.log(table);
     var row = table.insertRow(-1);
     //td分追加
     var cell1 = row.insertCell(-1);
@@ -39,13 +32,13 @@ function addCommandTable(key){
     cell1.innerHTML = '<input type="button" value="削除" id="coladd" onclick="deleteCommandTable(this)">';
     cell2.innerHTML = key;
     cell3.innerHTML = WordCommand[key];
-    console.log(key);
 }
 
 function deleteCommandTable(obj){
     // 削除ボタンを押下された行を取得
     tr = obj.parentNode.parentNode;
     delete WordCommand[tr.cells[1]];
+    console.log(WordCommand);
     updateCmdFile();
     // trのインデックスを取得して行を削除する
     tr.parentNode.deleteRow(tr.sectionRowIndex);
@@ -54,7 +47,6 @@ function deleteCommandTable(obj){
 function loadCmdFile() {
     const result = storage.get('config');
     if (result.status) {
-        console.log(result.data);
         WordCommand = result.data;
     } else {
         WordCommand = {"#log":"console.log(text)"}
