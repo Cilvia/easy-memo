@@ -6,6 +6,10 @@ require("electron")
     document.getElementById("memo").value = null;
   });
 
+window.onload= function(){
+    makeCommandTable();
+}
+
 function makeTask(function_word) {
   return new Function("text", function_word);
 }
@@ -31,6 +35,7 @@ function addCommand() {
   WordCommand[document.addCommandForm.word.value] =
     document.addCommandForm.js_code.value;
   updateCmdFile();
+  addCommandTable();
 }
 
 function makeCommandTable(){
@@ -41,7 +46,7 @@ function makeCommandTable(){
 }
 
 function addCommandTable(key){
-    var table = document.getElementById("table");
+    var table = document.getElementById('table');
     var row = table.insertRow(-1);
     //td分追加
     var cell1 = row.insertCell(-1);
