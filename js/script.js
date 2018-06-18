@@ -7,6 +7,7 @@ require("electron")
   });
 
 window.onload= function(){
+    loadCmdFile();
     makeCommandTable();
 }
 
