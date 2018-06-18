@@ -8,19 +8,18 @@
     <title>Setting</title>
 </head>
 <body>
-    <table id="table">
+    <table id="table" border="1" width="500" cellspacing="0" cellpadding="5" bordercolor="#000">
         <tr>
             <th>　　　 </th>
             <th>Command</th>
             <th>Process</th>
         </tr>
     </table>
-    <form name="addCommandForm" method="post" onsubmit="addCommand()">
+    <form name="addCommandForm">
         <input type="text" name="word" id="word">
         <textarea name="js_code" id="js_code" cols="100" rows="10"></textarea>
-        <input type="button" value="Submit!!">
+        <input type="button" value="Submit!!" onclick="addCommand()">
     </form>
-
 </body>
 <script src="js/script.js"></script>
 </html>
